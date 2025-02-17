@@ -17,3 +17,4 @@ def test_get_all_users_existing_keys():
     json_response = response.json()
     #assert "total_pages" in json_response.keys()
     assert_that(json_response).contains_key("data")
+    
