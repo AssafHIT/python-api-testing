@@ -1,18 +1,15 @@
 import requests
-from assertpy import assert_that
 
 def test_register_user_happy_flow():
     register_user_data = {
-        "email": "eve.holt@reqres.in",
-        "password": "cityslicka"
-    }
-    
+                            "email": "eve.holt@reqres.in",
+                            "password": "pistol"
+                         }
     response = requests.post(
-        url="https://reqres.in/api/register",
-        json=register_user_data
+        url = "https://reqres.in/api/register",
+        json = register_user_data
     )
+    assert response.status_code == 200
+    assert response.ok == True 
     
-
-    assert_that(response.status_code).is_equal_to(200)
-    assert_that(response.ok).is_true()
-    assert "token" in response.json().keys()
+    assert 'token' and 'id' in response.json().keys()
