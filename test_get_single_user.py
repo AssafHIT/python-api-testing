@@ -2,7 +2,7 @@ import requests
 
 def test_get_single_user_status_code_and_ok():
     response = requests.get("http://reqres.in/api/users/2")
-    assert response.status_code == 200
+    assert response.status_code == 200 # OK
     assert response.ok == True
     
 def test_get_single_user_existing_keys():
