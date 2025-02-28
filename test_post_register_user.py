@@ -11,10 +11,10 @@ def test_register_user_happy_flow(email, password):
         url = "https://reqres.in/api/register",
         json = register_user_data
     )
-    assert response.status_code == 200 # OK
-    assert response.ok
-    assert 'token' in response.json().keys()
-    assert 'id' in response.json().keys()
+    assert response.status_code == 200, f"Expected status code 200, but got {response.status_code}"
+    assert response.ok, f"Expected response to be OK, but got status code {response.status_code}"
+    assert 'token' in response.json().keys(), "Expected 'token' key in the response"
+    assert 'id' in response.json().keys(), "Expected 'id' key in the response"
 
 @pytest.mark.parametrize("email", [("eve.holt@reqres.in")])
 def test_register_user_missing_password(email):
@@ -25,10 +25,10 @@ def test_register_user_missing_password(email):
         url = "https://reqres.in/api/register",
         json = register_user_data
     )
-    assert response.status_code == 400 # Bad Request
-    assert response.ok == False 
+    assert response.status_code == 400, f"Expected status code 400, but got {response.status_code}"
+    assert not response.ok, f"Expected response to be False, but got {response.ok}"
     
-    assert response.json()["error"] == "Missing password"
+    assert response.json()["error"] == "Missing password", "Expected error message 'Missing password', but got a different error"
   
 @pytest.mark.parametrize("password", [("pistol")])  
 def test_register_user_missing_email(password):
@@ -39,6 +39,6 @@ def test_register_user_missing_email(password):
         url = "https://reqres.in/api/register",
         json = register_user_data
     )
-    assert response.status_code == 400 # Bad Request
-    assert response.ok == False 
-    assert response.json()["error"] == "Missing email or username"
+    assert response.status_code == 400, f"Expected status code 400, but got {response.status_code}"
+    assert not response.ok, f"Expected response to be False, but got {response.ok}"
+    assert response.json()["error"] == "Missing email or username", "Expected error message 'Missing email or username', but got a different error"
