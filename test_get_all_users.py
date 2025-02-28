@@ -5,7 +5,7 @@ import pytest
 def test_get_all_users_status_code_and_ok(page):
     response = requests.get("http://reqres.in/api/users", params = {"page": str(page)})
     assert response.status_code == 200 # OK
-    assert response.ok == True
+    assert response.ok
     
 @pytest.mark.parametrize("page", [1, 2])
 def test_get_all_users_existing_keys(page):

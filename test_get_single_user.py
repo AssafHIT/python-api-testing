@@ -10,7 +10,7 @@ def test_get_user_by_id(id):
 def test_get_single_user_status_code_and_ok():
     response = requests.get("http://reqres.in/api/users/2")
     assert response.status_code == 200 # OK
-    assert response.ok == True
+    assert response.ok
     
 def test_get_single_user_existing_keys():
     response = requests.get("http://reqres.in/api/users/2")

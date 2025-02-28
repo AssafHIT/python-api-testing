@@ -15,7 +15,7 @@ def test_create_user_happy_flow(name, job):
         json = created_user_data
     )
     assert response.status_code == 201 # Created
-    assert response.ok is True 
+    assert response.ok
     assert response.json().get("name") == name
     assert response.json().get("job") == job
     assert "id" in response.json().keys()
