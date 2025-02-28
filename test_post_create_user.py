@@ -2,7 +2,8 @@ import requests
 import pytest
 
 @pytest.mark.parametrize("name, job", [
-    ("Assaf Yehezkel", "Automation Developer")
+    ("Assaf Yehezkel", "Automation Developer"),
+    ("Jane Smith", "Backend Developer")
 ])
 def test_create_user_happy_flow(name, job):
     created_user_data = {

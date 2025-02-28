@@ -17,9 +17,12 @@ def test_register_user_happy_flow(email, password):
     assert response.ok == True 
     assert 'token' and 'id' in response.json().keys()
     
-def test_register_user_missing_password():
+@pytest.mark.parametrize("email", [
+    ("eve.holt@reqres.in")
+])
+def test_register_user_missing_password(email):
     register_user_data = {
-                            "email": "eve.holt@reqres.in"
+                            "email": email
                          }
     response = requests.post(
         url = "https://reqres.in/api/register",
@@ -29,10 +32,13 @@ def test_register_user_missing_password():
     assert response.ok == False 
     
     assert response.json()["error"] == "Missing password"
-    
-def test_register_user_missing_email():
+  
+@pytest.mark.parametrize("password", [
+    ("pistol")
+])  
+def test_register_user_missing_email(password):
     register_user_data = {
-                            "password": "pistol"
+                            "password": password
                          }
     response = requests.post(
         url = "https://reqres.in/api/register",
@@ -40,5 +46,4 @@ def test_register_user_missing_email():
     )
     assert response.status_code == 400 # Bad Request
     assert response.ok == False 
-    
     assert response.json()["error"] == "Missing email or username"
